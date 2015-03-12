@@ -5,3 +5,5 @@ gem("sinatra-contrib")
 gem("pg")
 gem("sinatra-activerecord")
 gem("rake")
+gem("foreigner")
+
