@@ -43,7 +43,7 @@ get("/playerportal") do
   # link for free agency (just another team)
   
   # creating/adding a player
-  
+  @players = Player.all() 
   erb(:playerportal)
 end
 
@@ -54,8 +54,47 @@ get("/addplayer") do
 end
 
 # Add Player Form Action #
-post("") do
+post("/addplayer") do
+  name = params.fetch("name")
+  position = params.fetch("position")
+  age = params.fetch("age")
+  rating = params.fetch("rating")
+  team = params.fetch("team")
+  @players = Player.all()
+  @player = Player.new({:name => name, :position => position, :age => age, :rating => rating, :team_id => team})
+  @player.save()
+  erb(:playerportal)
 end
+
+# Individual Player Pages #
+get("/players/:id") do
+  @teams = Team.all()
+  @player = Player.find(params.fetch("id").to_i)
+  erb(:players)  
+end
+
+# Edit Player #
+patch("/players/:id") do
+  name = params.fetch("name")
+  position = params.fetch("position")
+  age = params.fetch("age")
+  rating = params.fetch("rating")
+  team = params.fetch("team")
+  @teams = Team.all()
+  @player = Player.find(params.fetch("id").to_i())
+  @player.update({:name => name, :position => position, :age => age, :rating => rating})
+  @player.save() 
+  erb(:players)
+end
+
+# Remove Player #
+delete("/players/:id") do
+  @players = Player.all()
+  @player = Player.find(params.fetch("id").to_i())
+  @player.destroy()
+  erb(:playerportal)
+end
+
 
 
 

@@ -1,5 +1,19 @@
 <h1>Welcome to the Player Portal!</h1>
 
+
+<h3>Current league players</h3>
+
+  <% if @players.empty? %>
+    <p>*Crickets*</p>
+  <% else %>
+    <ul>
+      <% @players.all().each() do |player| %>
+      <li><%= player.name %><a href="/players/<%= player.id() %>">View Player</a></li>
+      <% end %>
+    </ul>
+  <% end %> 
 <a href="/addplayer">Add Player</a>
 
 <a href="/">Back</a>
+
+ 
