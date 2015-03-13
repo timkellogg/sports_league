@@ -48,6 +48,18 @@ post("/addteam") do
   @players = Player.all()
   @team = Team.new({:name => name, :location => location, :wins => 0, :losses => 0, :rating => rating})
   @team.save()
+  
+  # Add player relationship; set free agent to false 
+  player1.update({:team_id => @team.id(), :free_agent => false})
+  player1.save()
+  player2.update({:team_id => @team.id(), :free_agent => false})
+  player2.save()
+  player3.update({:team_id => @team.id(), :free_agent => false})
+  player3.save()
+  player4.update({:team_id => @team.id(), :free_agent => false})
+  player4.save()
+  player5.update({:team_id => @team.id(), :free_agent => false})
+  player5.save()
   erb(:index)
 end
 
@@ -113,8 +125,3 @@ delete("/players/:id") do
   @player.destroy()
   erb(:playerportal)
 end
-
-
-
-
-
