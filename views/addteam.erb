@@ -13,30 +13,54 @@
     
   <fieldset>
     <legend>Add Players</legend>
-    
-    <!-- Slots for PG, SG, SF, PF, C all required  -->
-    <label for="PG">Point Guard</label>   
-
-    <% @players.all().each() do |player| %>
-    <% if player.position == "PG" && player.team == "none" %>
-       <select name="PG">
-         <% 
-         
-    <label for=""
-           
-  <% if @teams.empty? %>
-    <p>Your player will be a free agent!</p>
-    <input id="team" name="team" type="hidden" value="Free Agent">
-  <% else %> 
-    <label for="team">Pick a Team</label>
-    <select name="team">
-      <% @teams.all().each() do |team| %>
-      <option value=<%= team.id() %>><%= team.name %></option>
-      <% end %>  
-    </select>
-  <% end %> 
    
-
+    <label for="PG">Point Guard</label>   
+    <select name="PG">
+    <% @players.all().each() do |player| %>
+    <% if player.position == "PG" && player.team == "Free Agent" %>
+         <option value="<%= player.name %>"><%=player.name%><%= player.rating %></option>
+    <% else %>
+       <option value="">There are no point guards</option>
+    <% end %> 
+    </select>
+             
+    <label for="SG">Shooting Guard</label>
+    <select name="SG">
+    <% @players.all().each() do |player| %>
+    <% if player.position == "SG" && player.team == "Free Agent" %> 
+        <option value="<%= player.name %>"><%= player.name%><%= player.rating %></option>
+    <% else %>
+      <option value="">There are no shooting guards</option>
+    <% end %>
+    
+    
+    <label for="SF">Small Forward</label>
+    <select name="SF">
+    <% @players.all().each() do |player| %>
+    <% if player.position == "SF" && player.team == "Free Agent" %>
+      <option value="<%= player.name %>"><%= player.name%><%= player.rating %></option>
+    <% else %>
+      <option value="">There are no small forwards</option>
+    <% end %>
+           
+    <label for="PF">Power Forward</label>
+    <select name="PF">
+    <% @players.all().each() do |player| %>
+    <% if player.position == "PF" && player.team == "Free Agent" %>
+      <option value="<%= player.name %>"><%= player.name%><%= player.rating %></option>
+    <% else %>
+      <option value="">There are no power forwards</option>
+    <% end %>
+      
+    <label for="C">Center</label>
+    <select name="C">
+    <% @players.all().each() do |player| %>
+    <% if player.position == "C" && player.team == "Free Agent" %>
+      <option value="<%= player.name %>"><%= player.name%><%= player.rating %></option>
+    <% else %>
+      <option value="">There are no centers</option>
+    <% end %>
+      
 
 
 <a href="/">Back to Main</a>
