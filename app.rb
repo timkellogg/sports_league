@@ -49,6 +49,7 @@ end
 
 # Add Player Page # 
 get("/addplayer") do
+  @teams = Team.all()
   erb(:addplayer)
 end
 
