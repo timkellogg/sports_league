@@ -6,4 +6,4 @@ gem("pg")
 gem("sinatra-activerecord")
 gem("rake")
 gem("foreigner")
-
+gem("quiet_assets")

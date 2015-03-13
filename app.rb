@@ -23,11 +23,13 @@ get("/teamportal") do
   
   # team listings / divisions
   @teams = Team.all()
+  @players = Player.all()
   erb(:teamportal)
 end
 
 # Add Team Page #
 get("/addteam") do 
+  @players = Player.all()
   @teams = Team.all()
   erb(:addteam)
 end
@@ -36,15 +38,17 @@ end
 post("/addteam") do
   name = params.fetch("name")
   location = params.fetch("location")
-  pg = params.fetch("PG")
-  sg = params.fetch("SG")
-  sf = params.fetch("SF")
-  pf = params.fetch("PF")
-  c = params.fetch("C")
-  rating = (pg.rating + sg.rating + sf.rating + pf.rating + center.rating) / 5
-  @team = Team.new({:name => name, :location => location, :wins => 0, :losses => 0, :rating => rating, :players => {pg, sg, sf, pf, c} })
+  player1 = Player.find(params.fetch("PG"))
+  player2 = Player.find(params.fetch("SG"))
+  player3 = Player.find(params.fetch("SF"))
+  player4 = Player.find(params.fetch("PF"))
+  player5 = Player.find(params.fetch("C"))
+  rating_total_points = player1.rating() + player2.rating() + player3.rating() + player4.rating() + player5.rating()
+  rating = rating_total_points / 5
   @players = Player.all()
-  erb(:addteam)
+  @team = Team.new({:name => name, :location => location, :wins => 0, :losses => 0, :rating => rating})
+  @team.save()
+  erb(:index)
 end
 
 #### PLAYER PORTAL #### 
@@ -68,9 +72,15 @@ post("/addplayer") do
   position = params.fetch("position")
   age = params.fetch("age")
   rating = params.fetch("rating")
-  team = params.fetch("team")
   @players = Player.all()
-  @player = Player.new({:name => name, :position => position, :age => age, :rating => rating, :team_id => team})
+  # Free Agent? 
+  if params.fetch("free_agent")
+    team = "none" 
+    @player = Player.new({:name => name, :position => position, :age => age, :rating => rating, :team_id => team, :free_agent => true})
+  else 
+    team = params.fetch("team")
+    @player = Player.new({:name => name, :position => position, :age => age, :rating => rating, :team_id => team, :free_agent => false})
+  end
   @player.save()
   erb(:playerportal)
 end

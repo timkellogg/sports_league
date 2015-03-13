@@ -36,7 +36,7 @@
   
   <% if @teams.empty? %>
     <p>Your player will be a free agent!</p>
-    <input id="team" name="team" type="hidden" value="Free Agent">
+    <input id="free_agent" name="free_agent" type="hidden" value="true">
   <% else %> 
     <label for="team">Pick a Team</label>
     <select name="team">

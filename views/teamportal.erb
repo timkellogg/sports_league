@@ -9,7 +9,7 @@
   <% else %>
     <ul>
       <% @teams.all().each() do |team| %>
-      <li><%= @team.location %><%= team.name %><a href="/teams/<%= team.id() %>">View Team</a></li>
+      <li>The <%= team.location %> <%= team.name %> <a href="/teams/<%= team.id() %>"> View Team</a></li>
       <% end %>
     </ul>
   <% end %> 
