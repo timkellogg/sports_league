@@ -34,7 +34,15 @@ end
 
 # Add Team Form Action #
 post("/addteam") do
-  
+  name = params.fetch("name")
+  location = params.fetch("location")
+  pg = params.fetch("PG")
+  sg = params.fetch("SG")
+  sf = params.fetch("SF")
+  pf = params.fetch("PF")
+  c = params.fetch("C")
+  rating = (pg.rating + sg.rating + sf.rating + pf.rating + center.rating) / 5
+  @team = Team.new({:name => name, :location => location, :wins => 0, :losses => 0, :rating => rating, :players => {pg, sg, sf, pf, c} })
   @players = Player.all()
   erb(:addteam)
 end
