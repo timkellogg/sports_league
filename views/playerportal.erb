@@ -8,7 +8,7 @@
   <% else %>
     <ul>
       <% @players.all().each() do |player| %>
-      <li><%= player.name %><a href="/players/<%= player.id() %>">View Player</a></li>
+      <li>(<%= player.position%>) <%= player.name %><a href="/players/<%= player.id() %>">View Player</a></li>
       <% end %>
     </ul>
   <% end %> 

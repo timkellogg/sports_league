@@ -63,6 +63,37 @@ post("/addteam") do
   erb(:index)
 end
 
+get("/teams/:id") do
+  @team = Team.find(params.fetch("id").to_i())
+  erb(:teams)
+end
+
+# Edit Team #
+patch("/teams/:id") do
+  name = params.fetch("name")
+  location = params.fetch("location")
+  @teams = Team.all()
+  @team = Team.find(params.fetch("id").to_i())
+  @team.update({:name => name, :location => location})
+  @team.save() 
+  erb(:teams)
+end
+
+# Delete Team #
+delete("/teams/:id") do
+  # remove player dependencies 
+  @team = Team.find(params.fetch("id").to_i())
+  @team.players().each() do |player|
+    player.update({:team_id => 0, :free_agent => true})
+    player.save()
+  end
+  # remove team from db
+  @team.destroy()
+  @teams = Team.all()
+  erb(:teamportal)
+end
+
+
 #### PLAYER PORTAL #### 
 # Main Player Page # 
 get("/playerportal") do
