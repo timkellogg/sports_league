@@ -1,0 +1,81 @@
+<h1><%= @team.name %></h1>
+
+<h2>Player Information</h2> 
+  
+  <p>Name: <%= @player.name %></p>
+  <p>Position: <%= @player.position %></p>
+  <p>Age: <%= @player.age %></p>
+  <p>Rating: <%= @player.rating %></p>
+  <p>Team: <%= @player.team %></p>
+  
+<h2>Update Player Information</h2>
+  
+<form action="/players/<%= @player.id() %>" method="post">
+  <input name="_method" type="hidden" value="patch">
+  <label for="name">Player Name</label>
+  <input id="name" name="name" type="text">
+  
+  <label for="position">Position</label>
+  <select name="position">
+    <option value="PG">Point Guard</option>
+    <option value="SG">Shooting Guard</option>
+    <option value="SF">Small Forward</option>
+    <option value="PF">Power Forward</option>
+    <option value="C">Center</option>
+  </select>
+  
+  <label for="age">Age</label>
+  <select name="age">
+    <% x = 60 %> 
+    <% y = 17 %>
+    <% while x > y %>
+    <option value=<%=y%>><%=y%></option>
+    <% y += 1 %>
+    <% end %> 
+  </select> 
+  
+  <label for="rating">Overall Rating</label>
+  <select name="rating">
+    <% x = 101 %>
+    <% y = 1 %>
+    <% while x > y %>
+    <option value=<%=y%>><%=y%></option>
+    <% y += 1 %>
+    <% end %> 
+  </select> 
+  
+  <% if @teams.empty? %>
+    <p>Your player will be a free agent!</p>
+    <input id="team" name="team" type="hidden" value="Free Agent">
+  <% else %> 
+    <label for="team">Pick a Team</label>
+    <select name="team">
+      <% @teams.all().each() do |team| %>
+      <option value=<%= team.id() %>><%= team.name %></option>
+      <% end %>  
+    </select>
+  <% end %> 
+   
+  <button type="submit">Update!</button>
+</form>
+
+<h2>Delete?</h2>
+  
+<form action="/players/<%= @player.id() %>" method="post">
+  <input name="_method" type="hidden" value="delete">
+  
+  <button type="submit">Delete</button>
+</form>
+  
+<a href="/">Back to Main</a>
+<a href="/playerportal">Back to Player Portal</a>
+
+  create_table "teams", force: :cascade do |t|
+    t.string   "name"
+    t.string   "location"
+    t.integer  "wins"
+    t.integer  "losses"
+    t.integer  "rating"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end

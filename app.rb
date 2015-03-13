@@ -22,26 +22,27 @@ end
 get("/teamportal") do
   
   # team listings / divisions
-  
+  @teams = Team.all()
   erb(:teamportal)
 end
 
 # Add Team Page #
 get("/addteam") do 
-  
+  @teams = Team.all()
   erb(:addteam)
 end
 
 # Add Team Form Action #
-post("") do
+post("/addteam") do
+  
+  @players = Player.all()
+  erb(:addteam)
 end
 
 #### PLAYER PORTAL #### 
 # Main Player Page # 
 get("/playerportal") do
-  
   # link for free agency (just another team)
-  
   # creating/adding a player
   @players = Player.all() 
   erb(:playerportal)

@@ -1,5 +1,44 @@
 <h1>Add a Team</h1>
 
+<form action="/addteam" method="post">
+  <fieldset>
+    <legend>Basic Information</legend>
+  <label for="name">Team Name</label>
+  <input id="name" name="name" type="text" required>
+  
+ 
+  <label for="location">Location</label>
+  <input id="location" name="name" type="text" required>
+  <fieldset>
+    
+  <fieldset>
+    <legend>Add Players</legend>
+    
+    <!-- Slots for PG, SG, SF, PF, C all required  -->
+    <label for="PG">Point Guard</label>   
+
+    <% @players.all().each() do |player| %>
+    <% if player.position == "PG" && player.team == "none" %>
+       <select name="PG">
+         <% 
+         
+    <label for=""
+           
+  <% if @teams.empty? %>
+    <p>Your player will be a free agent!</p>
+    <input id="team" name="team" type="hidden" value="Free Agent">
+  <% else %> 
+    <label for="team">Pick a Team</label>
+    <select name="team">
+      <% @teams.all().each() do |team| %>
+      <option value=<%= team.id() %>><%= team.name %></option>
+      <% end %>  
+    </select>
+  <% end %> 
+   
+
+
+
 <a href="/">Back to Main</a>
 
 <a href="/teamportal">Back to Team Portal</a>

@@ -1,6 +1,18 @@
 <h1>Welcome to the Team Portal!</h1>
 
+
+
+<h3>Current league players</h3>
+
+  <% if @teams.empty? %>
+    <p>*Crickets*</p>
+  <% else %>
+    <ul>
+      <% @teams.all().each() do |team| %>
+      <li><%= @team.location %><%= team.name %><a href="/teams/<%= team.id() %>">View Team</a></li>
+      <% end %>
+    </ul>
+  <% end %> 
+
 <a href="/addteam">Add a Team</a>
-
-
 <a href="/">Back</a>
