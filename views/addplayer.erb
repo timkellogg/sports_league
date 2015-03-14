@@ -33,20 +33,19 @@
     <% y += 1 %>
     <% end %> 
   </select> 
-  
+
+  <!--  Radio  -->
   <% if @teams.empty? %>
-    <p>Your player will be a free agent!</p>
+    <p>Your player will become a free agent</p>
+    <input id="team" name="team" type="hidden" value="">
     <input id="free_agent" name="free_agent" type="hidden" value="true">
-  <% else %> 
+  <% else %>
     <label for="team">Pick a Team</label>
-    <select name="team">
-      <% @teams.all().each() do |team| %>
-      <option value=<%= team.id() %>><%= team.name %></option>
-      <% end %>  
-    </select>
-  <% end %> 
-  
-  
+    <input name="team" value="" type="radio">Free Agency
+    <% @teams.all().each() do |team| %>
+      <input name="team" type="radio" value="<%= team.id() %>"><%= team.name %>
+    <% end %>
+  <% end %>
    
   <button type="submit">Create Player!</button>
 </form>

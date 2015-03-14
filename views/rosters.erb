@@ -1,0 +1,14 @@
+<h1>Team Rosters</h1>
+
+<% @teams.each() do |team| %>
+  <ul>
+    <li><%= team.name() %> <%= team.rating %></li>
+    <ul>
+      <% team.players().each() do |player| %>
+        <li>(<%= player.position %>) <%= player.name %></li>
+      <% end %>
+    </ul>
+  </ul>
+<% end %>
+
+<a href="/">Back to Main</a>

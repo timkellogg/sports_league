@@ -1,0 +1,13 @@
+<h1>Current Free Agents</h1>
+
+<!-- Check if any free agents -->
+<ul>
+ <% @players.each() do |player| %>
+    <% if player.free_agent %>
+      <li><%= player.name %> (<%= player.position %>), <%= player.rating %> Overall, <%= player.age %> Years Old</li>
+    <% else %>
+    <% end %>
+<% end %>
+</ul> 
+
+<a href="/">Back to Main</a>

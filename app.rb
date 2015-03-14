@@ -17,6 +17,23 @@ get("/") do
   erb(:index)
 end
 
+#### LEAGUE PAGES ####
+
+get("/information") do
+  erb(:information)
+end
+
+get("/freeagents") do
+  @players = Player.all() 
+  erb(:freeagents)
+end
+
+get("/rosters") do
+  @teams = Team.all()
+  @players = Player.all()
+  erb(:rosters)
+end
+
 #### TEAM PORTAL ####
 # Main Team Page #
 get("/teamportal") do
@@ -111,15 +128,16 @@ end
 
 # Add Player Form Action #
 post("/addplayer") do
+  @teams = Team.all()
   name = params.fetch("name")
   position = params.fetch("position")
   age = params.fetch("age")
   rating = params.fetch("rating")
+  team = params.fetch("team")
   @players = Player.all()
-  # Free Agent? 
-  if params.fetch("free_agent")
-    team = "none" 
-    @player = Player.new({:name => name, :position => position, :age => age, :rating => rating, :team_id => team, :free_agent => true})
+
+  if team == ""
+  @player = Player.new({:name => name, :position => position, :age => age, :rating => rating, :team_id => team, :free_agent => true})
   else 
     team = params.fetch("team")
     @player = Player.new({:name => name, :position => position, :age => age, :rating => rating, :team_id => team, :free_agent => false})
