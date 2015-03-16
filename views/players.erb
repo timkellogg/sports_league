@@ -2,13 +2,13 @@
 
 <h2>Player Information</h2> 
   
-  <p>Name: <%= @player.name %></p>
-  <p>Position: <%= @player.position %></p>
-  <p>Age: <%= @player.age %></p>
-  <p>Rating: <%= @player.rating %></p>
-  <p>Team: <%= @player.team %></p>
-  <p>Free Agent? <%= @player.free_agent %></p>
-  
+  <p>Name: <%= @player.name() %></p>
+  <p>Position: <%= @player.position() %></p>
+  <p>Age: <%= @player.age() %></p>
+  <p>Rating: <%= @player.rating() %></p>
+  <p>Team: <%= @player.team() %></p>
+  <p>Free Agent? <%= @player.free_agent() %></p>
+
 <h2>Update Player Information</h2>
   
 <form action="/players/<%= @player.id() %>" method="post">

@@ -11,10 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150313175048) do
+ActiveRecord::Schema.define(version: 20150316182658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "games", force: :cascade do |t|
+    t.integer "visiting_team"
+    t.integer "home_team"
+    t.integer "visiting_score"
+    t.integer "home_score"
+    t.integer "winner"
+    t.integer "team_id"
+    t.integer "player_id"
+    t.integer "league_id"
+  end
+
+  create_table "league", force: :cascade do |t|
+    t.string "teams"
+    t.string "players"
+  end
 
   create_table "players", force: :cascade do |t|
     t.string   "name"
@@ -25,6 +41,7 @@ ActiveRecord::Schema.define(version: 20150313175048) do
     t.datetime "updated_at"
     t.integer  "team_id"
     t.boolean  "free_agent"
+    t.integer  "league_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -35,6 +52,7 @@ ActiveRecord::Schema.define(version: 20150313175048) do
     t.integer  "rating"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "league_id"
   end
 
 end
