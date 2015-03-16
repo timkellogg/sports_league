@@ -4,6 +4,7 @@ require("sinatra/activerecord")
 require("player")
 require("team")
 require("league")
+require("game")
 
 
 RSpec.configure do |config|
@@ -19,9 +20,6 @@ RSpec.configure do |config|
     end
     Game.all().each() do |game|
       game.destroy()
-    end
-    Schedule.all().each() do |schedule|
-      schedule.destroy()
     end
   end
 end
